@@ -5,7 +5,7 @@ A **factory production line showcase** built in Unity, where players can **opera
 ## 🌐 Play Online
 
 - This project is built for **WebGL** and can be played directly in the browser.
-Github Pages website link is still a work in progress.
+- Play at: https://t2ne.eu/autofab
 
 ## 🌟 Features
 
