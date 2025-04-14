@@ -1,16 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.UI.CanvasScaler;
 
 public class Converter : MonoBehaviour
 {
-    public List<GameObject> onHit;
+    public List<GameObject> onHit = new List<GameObject>();
     public GameObject merger;
     public GameObject Wo;
     public GameObject Ato;
@@ -23,26 +18,29 @@ public class Converter : MonoBehaviour
     public int PBint;
     public int PBLint;
 
+    public float interval = 1.0f;
 
-    public float interval = 1.0f; // The interval in seconds between instances
-
-
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
-    
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Trigger coroutines with key presses (for testing)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            StartCoroutine(spawnWooden());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            StartCoroutine(spawnAtom());
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject == null) return;
 
         switch (collision.gameObject.name)
         {
@@ -53,54 +51,63 @@ public class Converter : MonoBehaviour
                 Atom++;
                 break;
         }
+
         onHit.Add(collision.gameObject);
     }
 
     void FixedUpdate()
     {
-        for (int i = 0; i <= onHit.Count - 1; i++)
+        // Destroy & clean up list
+        for (int i = onHit.Count - 1; i >= 0; i--)
         {
-            Destroy(onHit[i]);
+            if (onHit[i] != null)
+            {
+                Destroy(onHit[i]);
+            }
+            onHit.RemoveAt(i);
         }
-        Pcount.text = "Atom: " + Atom.ToString();
-        Bcount.text = "Wooden: " + Wooden.ToString(); 
-        PBcount.text = PBint.ToString();
-        PBLcount.text = PBLint.ToString();
 
+        // Auto-trigger coroutines if conditions met
+        if (PBLint == 0 && Wooden >= 1)
+        {
+            StartCoroutine(spawnWooden());
+        }
+
+        if (PBint == 0 && Atom >= 1)
+        {
+            StartCoroutine(spawnAtom());
+        }
+
+        // Update UI
+        Pcount.text = "Atom: " + Atom.ToString();
+        Bcount.text = "Wooden: " + Wooden.ToString();
     }
+
     public IEnumerator spawnWooden()
     {
         PBLint++;
 
-        // Loop enquanto PBLint for maior ou igual a 1 e Wooden for maior ou igual a 0
         while (PBLint >= 1 && Wooden >= 1)
         {
             Instantiate(Wo, merger.transform.position, merger.transform.rotation);
             Wooden -= 1;
-
-
-            // Se Wooden tornar-se menor que 0, pare o loop
             PBLint--;
 
             yield return new WaitForSeconds(interval);
-            
         }
     }
+
     public IEnumerator spawnAtom()
     {
         PBint++;
+
         while (PBint >= 1 && Atom >= 1)
         {
-            
             Instantiate(Ato, merger.transform.position, merger.transform.rotation);
             Atom -= 1;
             PBint--;
+
             yield return new WaitForSeconds(interval);
-            
         }
-        
     }
-    
-        
-    
 }

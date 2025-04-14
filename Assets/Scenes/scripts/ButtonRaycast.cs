@@ -38,7 +38,7 @@ public class ButtonRaycast : MonoBehaviour
         S2S_2 = GameObject.Find("S2S_2");
         SS = S1;
         converter = GameObject.Find("Converter");
-        
+
     }
 
     private void Update()
@@ -49,23 +49,22 @@ public class ButtonRaycast : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                obj=hit.transform.gameObject;
-                Debug.Log(obj);
+                obj = hit.transform.gameObject;
                 switch (obj.name)
                 {
-                  
+
                     case "B3":
-               
-                            StartCoroutine(converter.GetComponent<Converter>().spawnWooden());
-                        
-                      
+
+                        StartCoroutine(converter.GetComponent<Converter>().spawnWooden());
+
+
                         break;
                     case "B4":
                         StartCoroutine(converter.GetComponent<Converter>().spawnAtom());
                         break;
-                    
+
                     case "S2S":
-                        
+
                         if (isFirstLine1)
                         {
                             S2.GetComponent<initial>().CancelInvoke();
@@ -114,7 +113,7 @@ public class ButtonRaycast : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                obj = hit.transform.gameObject; 
+                obj = hit.transform.gameObject;
                 if (obj.tag == "Belt")
                 {
                     obj.GetComponent<ConveyorBelt>().speed += 2;
@@ -138,11 +137,12 @@ public class ButtonRaycast : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             PlayerCam.GetComponent<Camera>().enabled = false;
-        } else if (Input.GetKeyDown(KeyCode.Alpha2))
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             PlayerCam.GetComponent<Camera>().enabled = true;
         }
     }
 
-    
+
 }
