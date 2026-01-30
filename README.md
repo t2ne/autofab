@@ -5,7 +5,7 @@ A **factory production line showcase** built in Unity, where players can **opera
 ## 🌐 Play Online
 
 - This project is built for **WebGL** and can be played directly in the browser.
-- Play at: https://t2ne.eu/autofab
+- Play at: https://gh.no-tone.com/autofab
 
 ## 🌟 Features
 
@@ -48,7 +48,7 @@ The game features an **immersive audio experience**:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/t2ne/autofab.git
+   git clone https://github.com/n0-tone/autofab.git
    ```
 2. Open the project in **Unity**
 3. Build and run for **WebGL**
@@ -67,7 +67,7 @@ Tested and working on:
 
 ## 🙋‍♂️ Author
 
-@t2ne - Me
+@no-tone - @cyzuko
 
 ## 🎓 Academic Project
 
